@@ -88,6 +88,10 @@ var YAAW = (function() {
 			$("#btnSelectStopped").live("click", function() {
 				YAAW.tasks.selectStopped();
 			});
+			$("#btnSelectUnfinished").live("click", function() {
+				YAAW.tasks.selectUnfinished();
+			});
+
 			$("#btnStartAll").live("click", function() {
 				ARIA2.unpause_all();
 			});
@@ -670,6 +674,15 @@ var YAAW = (function() {
 				var _this = this;
 				this.unSelectAll(true);
 				$("#stopped-tasks-table .task").each(function(i, n) {
+					_this.select(n);
+				});
+				this.check_select();
+			},
+
+			selectUnfinished:function() {
+				var _this = this;
+				this.unSelectAll(true);
+				$(".tasks-table .task[data-status=paused],[data-status=error]").each(function(i, n) {
 					_this.select(n);
 				});
 				this.check_select();
